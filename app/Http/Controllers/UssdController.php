@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\SmsBuilder;
+use PhpSmpp\Transport\SocketTransport;
 
 class UssdController extends Controller
 {
 
     public function index()
     {
+        SocketTransport::$forceIpv4=true;
+        SocketTransport::$defaultDebug=true;
         $service = new \PhpSmpp\Service\Listener(['192.168.2.12:5000'], 'ibmbankuser', 'IB27M922', 'transceiver', true);
         $service->listen(function (\PhpSmpp\Pdu\Pdu $pdu) {
             var_dump($pdu->id);
