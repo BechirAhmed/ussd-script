@@ -13,7 +13,8 @@ class UssdController extends Controller
     {
         SocketTransport::$forceIpv4=true;
         SocketTransport::$defaultDebug=true;
-        $service = new \PhpSmpp\Service\Listener(['192.168.2.12:5000'], 'ibmbankuser', 'IB27M922', 'transceiver', true);
+        // $service = new \PhpSmpp\Service\Listener(['192.168.2.12:5000'], 'ibmbankuser', 'IB27M922', 'transceiver', true);
+        $service = new \PhpSmpp\Service\Listener(['192.168.21.141:5000'], 'ibmbankuser', 'IB27M922', 'transceiver', true);
         $service->listen(function (\PhpSmpp\Pdu\Pdu $pdu) {
             var_dump($pdu->id);
             var_dump($pdu->sequence);
